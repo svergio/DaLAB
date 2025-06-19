@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  portainer:
+    image: portainer/portainer-ce:lts
+    container_name: portainer
+    restart: always
+    ports:
+      - "${PORTAINER_UI_PORT:-9443}:9443"
+      - "${PORTAINER_EDGE_PORT:-8000}:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    environment:
+      - TZ=${TZ:-UTC}
+    networks:
+      - data-stack-network
+
+volumes:
+  portainer_data:
+    name: portainer_data
+
+networks:
+  data-stack-network:
+    name: data-stack-network
+    external: true
+    

@@ -1,0 +1,11 @@
+FROM portainer/portainer-ce:lts
+
+# Установка дополнительных утилит (пример)
+RUN apk add --no-cache curl
+
+# Копирование пользовательских сертификатов (опционально)
+# COPY ./certs/portainer.crt /certs/portainer.crt
+# COPY ./certs/portainer.key /certs/portainer.key
+
+# Настройка точки входа (по умолчанию наследуется от базового образа)
+# CMD ["--sslcert", "/certs/portainer.crt", "--sslkey", "/certs/portainer.key"]
