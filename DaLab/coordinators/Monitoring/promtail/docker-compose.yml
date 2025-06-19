@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  promtail:
+    image: grafana/promtail:2.8.6
+    container_name: promtail
+    restart: unless-stopped
+    volumes:
+      - ./promtail-config.yml:/etc/promtail/config.yml
+      - /var/log:/var/log
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    external: true
